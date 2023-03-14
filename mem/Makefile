@@ -7,7 +7,7 @@ objects = $(sources:.c=.o)
 
 SHELL := /bin/bash
 CC = clang
-CFLAGS = -Weverything -Wall -Wextra -Werror -Wpedantic -fno-inline -Wno-poison-system-directories $(HEADERS)
+CFLAGS = -Weverything -Wall -Wextra -Werror -Wpedantic -fno-inline -Wno-poison-system-directories -Wno-reserved-identifier $(HEADERS)
 LDFLAGS = --shared
 
 all: release
