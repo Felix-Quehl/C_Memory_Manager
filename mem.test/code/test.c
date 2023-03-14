@@ -5,7 +5,9 @@
 
 void test_with_single_value_with_dedicated_release()
 {
-    int *a = allocate_memory(sizeof(&a));
+    int *a;
+
+    a = allocate_memory(sizeof(&a));
     assert(get_leak_flag() == 1);
     release_memory(a);
     assert(get_leak_flag() == 0);
@@ -13,7 +15,9 @@ void test_with_single_value_with_dedicated_release()
 
 void test_with_single_value_with_generic_release()
 {
-    int *a = allocate_memory(sizeof(&a));
+    int *a;
+
+    a = allocate_memory(sizeof(&a));
     assert(get_leak_flag() == 1);
     release_all_memory();
     assert(get_leak_flag() == 0);
@@ -21,9 +25,12 @@ void test_with_single_value_with_generic_release()
 
 void test_with_two_values_with_dedicated_release()
 {
-    int *a = allocate_memory(sizeof(&a));
+    int *a;
+    int *b;
+
+    a = allocate_memory(sizeof(&a));
     assert(get_leak_flag() == 1);
-    int *b = allocate_memory(sizeof(&b));
+    b = allocate_memory(sizeof(&b));
     assert(get_leak_flag() == 1);
     release_memory(a);
     assert(get_leak_flag() == 1);
@@ -33,9 +40,12 @@ void test_with_two_values_with_dedicated_release()
 
 void test_with_two_values_with_dedicated_release_in_reverse()
 {
-    int *a = allocate_memory(sizeof(&a));
+    int *a;
+    int *b;
+
+    a = allocate_memory(sizeof(&a));
     assert(get_leak_flag() == 1);
-    int *b = allocate_memory(sizeof(&b));
+    b = allocate_memory(sizeof(&b));
     assert(get_leak_flag() == 1);
     release_memory(b);
     assert(get_leak_flag() == 1);
@@ -45,11 +55,15 @@ void test_with_two_values_with_dedicated_release_in_reverse()
 
 void test_with_multiple_values_with_dedicated_release()
 {
-    int *a = allocate_memory(sizeof(&a));
+    int *a;
+    int *b;
+    int *c;
+    
+    a = allocate_memory(sizeof(&a));
     assert(get_leak_flag() == 1);
-    int *b = allocate_memory(sizeof(&b));
+    b = allocate_memory(sizeof(&b));
     assert(get_leak_flag() == 1);
-    int *c = allocate_memory(sizeof(&c));
+    c = allocate_memory(sizeof(&c));
     assert(get_leak_flag() == 1);
     release_memory(b);
     assert(get_leak_flag() == 1);
