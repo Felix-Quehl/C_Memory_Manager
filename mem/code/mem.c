@@ -5,7 +5,7 @@
 
 static struct allocation_trace *mem_trace_root;
 
-void *_allocate_memory(size_t amount, char *file, int line)
+void *internal_allocate_memory(size_t amount, char *file, int line)
 {
     struct allocation_trace *new_trace;
 
@@ -78,7 +78,7 @@ void release_track(struct allocation_trace *trace)
 {
     short trace_is_root;
     short there_are_other_traces;
-    
+
     if (trace != NULL)
     {
         trace_is_root = trace == mem_trace_root;
