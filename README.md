@@ -31,3 +31,5 @@ Executing-Test: test_with_two_values_with_dedicated_release_in_reverse
 Executing-Test: test_with_multiple_values_with_dedicated_release
 Executing-Test: test_that_no_leaks_remain
 ```
+
+After completion you can find the library file under this path: './mem/libmem.so'
