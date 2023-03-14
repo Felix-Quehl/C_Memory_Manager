@@ -8,7 +8,9 @@ Please look at the unit test code to see how its used.
 ## How to Build and Test
 
 ### Build
-S
+
+Just use make to build everything.
+
 ```bash
 make
 ```
