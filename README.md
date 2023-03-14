@@ -33,4 +33,4 @@ Executing-Test: test_with_multiple_values_with_dedicated_release
 Executing-Test: test_that_no_leaks_remain
 ```
 
-After `make` completed the build and testing you can find the dynamic linkable library file under this path: `./mem/libmem.so`
+After `make` completed the build and testing and the output shows no errors, you can find the dynamic linkable library file under this path: `./mem/libmem.so`
