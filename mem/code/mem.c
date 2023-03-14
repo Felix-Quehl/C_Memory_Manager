@@ -7,7 +7,9 @@ static struct allocation_trace *mem_trace_root;
 
 void *_allocate_memory(size_t amount, char *file, int line)
 {
-    struct allocation_trace *new_trace = malloc(sizeof(struct allocation_trace));
+    struct allocation_trace *new_trace;
+
+    new_trace = malloc(sizeof(struct allocation_trace));
     new_trace->file = file;
     new_trace->line = line;
     new_trace->memory_pointer = malloc(amount);
@@ -35,9 +37,12 @@ void *_allocate_memory(size_t amount, char *file, int line)
 
 struct allocation_trace *get_trace(void *pointer)
 {
-    short reached_end = 1;
     short searching_for_trace;
-    struct allocation_trace *trace = mem_trace_root;
+    short reached_end;
+    struct allocation_trace *trace;
+
+    trace = mem_trace_root;
+    reached_end =1;
     if (get_leak_flag())
     {
         do
@@ -63,7 +68,9 @@ struct allocation_trace *get_trace(void *pointer)
 
 void release_memory(void *pointer)
 {
-    struct allocation_trace *trace = get_trace(pointer);
+    struct allocation_trace *trace;
+
+    trace = get_trace(pointer);
     release_track(trace);
 }
 
@@ -71,6 +78,7 @@ void release_track(struct allocation_trace *trace)
 {
     short trace_is_root;
     short there_are_other_traces;
+    
     if (trace != NULL)
     {
         trace_is_root = trace == mem_trace_root;
