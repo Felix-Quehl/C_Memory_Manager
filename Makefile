@@ -2,13 +2,13 @@ all: test
 
 test: export LD_LIBRARY_PATH=./mem
 test: export DYLD_LIBRARY_PATH=./mem
-test: libmem.so test.out
+test: ./mem/libmem.so ./mem.test/test.out
 	./mem.test/test.out 
 
-libmem.so:
+./mem/libmem.so:
 	cd ./mem && $(MAKE)
 
-test.out:
+./mem.test/test.out:
 	cd ./mem.test && $(MAKE)
 	
 clean:
