@@ -70,7 +70,7 @@ void test_with_multiple_values_with_dedicated_release()
     assert_leak(FALSE);
 }
 
-void main()
+int main()
 {
     printf("*********************************************\n");
     test_with_single_value_with_dedicated_release();
@@ -80,4 +80,5 @@ void main()
     test_with_multiple_values_with_dedicated_release();
     printf("*********************************************\n");
     assert_leak(FALSE);
+    return 0;
 }

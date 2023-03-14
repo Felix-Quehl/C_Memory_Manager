@@ -50,7 +50,7 @@ struct allocation_trace *get_trace(void *pointer)
                 reached_end = trace == root_trace;
                 if (reached_end)
                 {
-                    return NULL;
+                    break;
                 }
             }
             else
@@ -59,10 +59,7 @@ struct allocation_trace *get_trace(void *pointer)
             }
         } while (searching_for_trace);
     }
-    else
-    {
-        return NULL;
-    }
+    return NULL;
 }
 
 void _release_memory(void *pointer)
