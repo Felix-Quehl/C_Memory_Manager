@@ -7,13 +7,13 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
-
+  build_and_test:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v3
     - name: build
       run: make
     - name: test
-      run: ./test.out
+      run: |
+        find .
+        ./test.out
