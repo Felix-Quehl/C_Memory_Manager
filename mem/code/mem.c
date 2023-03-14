@@ -1,10 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "mem.h"
-#include "boolean.h"
 #include "assert.h"
 
-struct allocation_trace *root_trace;
+static struct allocation_trace *mem_trace_root;
 
 void *_allocate_memory(size_t amount, char *file, int line)
 {
@@ -13,18 +12,18 @@ void *_allocate_memory(size_t amount, char *file, int line)
     new_trace->line = line;
     new_trace->memory_pointer = malloc(amount);
 
-    if (root_trace == NULL)
+    if (mem_trace_root == NULL)
     {
-        /* make new trace self-refencing root trace */
+        /* make new trace self-referencing root trace */
         new_trace->successor = new_trace;
         new_trace->predecessor = new_trace;
-        root_trace = new_trace;
+        mem_trace_root = new_trace;
     }
     else
     {
         /* set correct linking for new trace */
-        new_trace->successor = root_trace;
-        new_trace->predecessor = root_trace->predecessor;
+        new_trace->successor = mem_trace_root;
+        new_trace->predecessor = mem_trace_root->predecessor;
 
         /* set correct linking existing traces */
         new_trace->successor->predecessor = new_trace;
@@ -36,9 +35,9 @@ void *_allocate_memory(size_t amount, char *file, int line)
 
 struct allocation_trace *get_trace(void *pointer)
 {
-    short reached_end = TRUE;
+    short reached_end = 1;
     short searching_for_trace;
-    struct allocation_trace *trace = root_trace;
+    struct allocation_trace *trace = mem_trace_root;
     if (get_leak_flag())
     {
         do
@@ -47,7 +46,7 @@ struct allocation_trace *get_trace(void *pointer)
             if (searching_for_trace)
             {
                 trace = trace->predecessor;
-                reached_end = trace == root_trace;
+                reached_end = trace == mem_trace_root;
                 if (reached_end)
                 {
                     break;
@@ -62,31 +61,29 @@ struct allocation_trace *get_trace(void *pointer)
     return NULL;
 }
 
-void _release_memory(void *pointer)
+void release_memory(void *pointer)
 {
-    short trace_is_root;
-    short there_are_other_traces;
     struct allocation_trace *trace = get_trace(pointer);
-    _release_track(trace);
+    release_track(trace);
 }
 
-void _release_track(struct allocation_trace *trace)
+void release_track(struct allocation_trace *trace)
 {
     short trace_is_root;
     short there_are_other_traces;
     if (trace != NULL)
     {
-        trace_is_root = trace == root_trace;
+        trace_is_root = trace == mem_trace_root;
         if (trace_is_root)
         {
             there_are_other_traces = trace != trace->successor;
             if (there_are_other_traces)
             {
-                root_trace = trace->successor;
+                mem_trace_root = trace->successor;
             }
             else
             {
-                root_trace = NULL;
+                mem_trace_root = NULL;
             }
         }
         trace->predecessor->successor = trace->successor;
@@ -100,31 +97,11 @@ void release_all_memory()
 {
     while (get_leak_flag())
     {
-        _release_track(root_trace);
+        release_track(mem_trace_root);
     }
 }
 
 short get_leak_flag()
 {
-    return root_trace != NULL;
-}
-
-void prompt_memory_leaks()
-{
-    short found_leak = get_leak_flag();
-    if (found_leak)
-    {
-        short not_reached_end = TRUE;
-        struct allocation_trace *trace = root_trace;
-        do
-        {
-            printf(
-                "memory address %p was allocated at '%s:%d' but not released\n",
-                trace->memory_pointer,
-                trace->file,
-                trace->line);
-            trace = trace->successor;
-            not_reached_end = trace != root_trace;
-        } while (not_reached_end);
-    }
+    return mem_trace_root != NULL;
 }
