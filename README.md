@@ -8,7 +8,7 @@ Please look at the unit test code to see how its used.
 
 ## How to Build and Test
 
-Just use make to build and test everything.
+Just use `make` to build and test everything.
 
 ```bash
 make
