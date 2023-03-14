@@ -1,5 +1,5 @@
 
-name: "code_analysis.yml"
+name: "code_analysis"
 
 on:
   push:
