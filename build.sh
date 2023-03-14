@@ -1,1 +1,0 @@
-gcc ./sources/* -I./includes
