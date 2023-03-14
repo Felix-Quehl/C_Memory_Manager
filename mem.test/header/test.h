@@ -2,7 +2,7 @@
 #define HEADER_TEST
 
 
-#define RUN_TEST(TEST) TEST(); printf("%s: success\n", #TEST)
+#define RUN_TEST(TEST) printf("Executing-Test: %s\n", #TEST); TEST(); 
 
 void test_with_single_value_with_dedicated_release(void);
 void test_with_single_value_with_generic_release(void);
