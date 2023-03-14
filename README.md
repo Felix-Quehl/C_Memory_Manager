@@ -1,7 +1,7 @@
 
 # C Memory Manager <br> [![build_and_test](https://github.com/Felix-Quehl/C_Memory_Manager/actions/workflows/build_and_test.yml/badge.svg)](https://github.com/Felix-Quehl/C_Memory_Manager/actions/workflows/build_and_test.yml)[![code_analysis](https://github.com/Felix-Quehl/C_Memory_Manager/actions/workflows/code_analysis.yml/badge.svg)](https://github.com/Felix-Quehl/C_Memory_Manager/actions/workflows/code_analysis.yml)
 
-This repo contain the code for a memory manager library in C.
+This repo contain the code for a **united-tested** memory manager library in C.
 The library help the consumer to keep track of memory allocations and detect memory leaks.
 
 Please look at the unit test code to see how its used.
