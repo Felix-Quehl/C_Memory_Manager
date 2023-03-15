@@ -1,0 +1,38 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "lib: make clean debug",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"clean",
+				"debug"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/mem"
+			},
+			"problemMatcher": [
+				"$gcc"
+			]
+		},
+		{
+			"label": "test: make clean debug",
+			"type": "shell",
+			"command": "make",
+			"args": [
+				"clean",
+				"debug"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/mem.test"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"dependsOn":[
+				"lib: make clean debug"
+			]
+		},
+	]
+}
