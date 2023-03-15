@@ -14,6 +14,8 @@ Use `make` top build a clean release version.
 make clean release
 ```
 
+Sample Output:
+
 ```bash
 rm -fr libmem.so test.out libmem.so mem.h out
 cd ./mem && /Applications/Xcode.app/Contents/Developer/usr/bin/make clean
@@ -41,7 +43,7 @@ make clean test
 
 Sample Output:
 
-```
+```bash
 rm -fr libmem.so test.out libmem.so mem.h out
 cd ./mem && /Applications/Xcode.app/Contents/Developer/usr/bin/make clean
 rm -rf .//code/mem.o libmem.so
