@@ -2,7 +2,7 @@ name = test.out
 HEADERS = -I./header -I../mem/header
 LIBRARIES = -L../mem -lmem
 
-trash = $(shell find ./ -name '*.o') $(name)
+trash = $(shell find ./ -name '*.o') $(name) *.profraw *.profdata
 sources = $(shell find ./code -name '*.c')
 objects = $(sources:.c=.o)
 
@@ -16,6 +16,8 @@ all: release
 release: $(name)
 
 debug: CFLAGS += -g
+debug: CFLAGS += -fprofile-instr-generate -fcoverage-mapping
+debug: LDFLAGS += -fprofile-instr-generate -fcoverage-mapping
 debug: $(name)
 
 $(name): $(objects) 

@@ -15,6 +15,8 @@ all: release
 release: $(name)
 
 debug: CFLAGS += -g
+debug: CFLAGS += -fprofile-instr-generate -fcoverage-mapping
+debug: LDFLAGS += -fprofile-instr-generate -fcoverage-mapping
 debug: $(name)
 
 $(name): $(objects)
