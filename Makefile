@@ -1,8 +1,9 @@
 
-UNAME := $(shell uname)
-ifeq ($(UNAME_S),Darwin)
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
 	LLVM = llvm
-else
+endif
+ifeq ($(UNAME_S),Darwin)
 	LLVM = xcrun llvm
 endif
 
