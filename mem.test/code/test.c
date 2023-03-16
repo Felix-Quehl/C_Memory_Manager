@@ -58,7 +58,7 @@ void test_with_multiple_values_with_dedicated_release()
     int *a;
     int *b;
     int *c;
-    
+
     a = allocate_memory(sizeof(&a));
     assert(get_leak_flag() == 1);
     b = allocate_memory(sizeof(&b));
@@ -71,6 +71,23 @@ void test_with_multiple_values_with_dedicated_release()
     assert(get_leak_flag() == 1);
     release_memory(c);
     assert(get_leak_flag() == 0);
+}
+
+void test_with_external_allocated_pointer()
+{
+    int *a;
+    int *b;
+    struct allocation_trace *trace;
+
+    a = malloc(sizeof(&a));
+    assert(get_leak_flag() == 0);
+    b = allocate_memory(sizeof(&b));
+    assert(get_leak_flag() == 1);
+    trace = get_trace(a);
+    assert(trace == NULL);
+    release_memory(b);
+    assert(get_leak_flag() == 0);
+    release_memory(a);
 }
 
 void test_that_no_leaks_remain()
