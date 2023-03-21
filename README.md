@@ -67,7 +67,7 @@ Executing-Test: test_with_multiple_values_with_dedicated_release
 Executing-Test: test_with_external_allocated_pointer
 Executing-Test: test_that_no_leaks_remain
 xcrun llvm-profdata merge -sparse ./mem.test/mem.profraw -o ./mem.test/mem.profdata
-xcrun llvm-cov export ./mem/libmem.so -instr-profile=./mem.test/mem.profdata | python3 ./util/coverage_check.py 80
+xcrun llvm-cov export ./mem/libmem.so -instr-profile=./mem.test/mem.profdata | python3 ./.util/coverage_check.py 80
 **************************************************
 
 Coverage:
