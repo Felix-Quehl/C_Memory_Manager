@@ -18,7 +18,7 @@ test: export DYLD_LIBRARY_PATH=./mem
 test: ./mem/libmem.so ./mem.test/test.out
 	./mem.test/test.out 
 	$(LLVM)-profdata merge -sparse ./mem.test/mem.profraw -o ./mem.test/mem.profdata
-	$(LLVM)-cov export ./mem/libmem.so -instr-profile=./mem.test/mem.profdata | python3 ./coverage_check.py 80
+	$(LLVM)-cov export ./mem/libmem.so -instr-profile=./mem.test/mem.profdata | python3 ./util/coverage_check.py 80
 	
 out:
 	mkdir -p out
