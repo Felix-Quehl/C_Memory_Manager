@@ -22,8 +22,8 @@ test: ./mem/libmem.so ./mem.test/test.out
 	
 out:
 	mkdir -p out
-	cp ./mem/libmem.so ./out
-	cp ./mem/header/mem.h ./out
+	cp ./mem/*.so ./out
+	cp ./mem/header/*.h ./out
 
 ./mem/libmem.so:
 	cd ./mem && $(MAKE) $(args)
