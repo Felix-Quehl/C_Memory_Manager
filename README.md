@@ -6,7 +6,9 @@ The library help the consumer to keep track of memory allocations and detect mem
 
 Please look at the unit test code to see how its used.
 
-## How to Build and Test
+## Build & Test
+
+### Build
 
 Use `make` top build a clean release version.
 
@@ -33,7 +35,7 @@ cp ./mem/header/mem.h ./out
 After `make` completed the build completed , you can grab the dynamic linkable library file and the header file from the out directory: `./out`
 
 
-### Build Release
+### Test
 
 Just use `make` to test everything.
 
