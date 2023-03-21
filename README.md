@@ -50,7 +50,7 @@ rm -fr libmem.so test.out libmem.so mem.h out
 cd ./mem && /Applications/Xcode.app/Contents/Developer/usr/bin/make clean
 rm -rf .//code/mem.o libmem.so
 cd ./mem.test && /Applications/Xcode.app/Contents/Developer/usr/bin/make clean
-rm -rf  test.out *.profraw *.profdata
+rm -rf .//code/main.o .//code/test.o test.out *.profraw *.profdata
 cd ./mem && /Applications/Xcode.app/Contents/Developer/usr/bin/make debug
 clang -Weverything -Wall -Wextra -Werror -Wpedantic -fno-inline -Wno-poison-system-directories -I./header -g -fprofile-instr-generate -fcoverage-mapping  -o code/mem.o -c code/mem.c 
 clang --shared -fprofile-instr-generate -fcoverage-mapping code/mem.o -o libmem.so
@@ -64,12 +64,19 @@ Executing-Test: test_with_single_value_with_generic_release
 Executing-Test: test_with_two_values_with_dedicated_release
 Executing-Test: test_with_two_values_with_dedicated_release_in_reverse
 Executing-Test: test_with_multiple_values_with_dedicated_release
+Executing-Test: test_with_external_allocated_pointer
 Executing-Test: test_that_no_leaks_remain
 xcrun llvm-profdata merge -sparse ./mem.test/mem.profraw -o ./mem.test/mem.profdata
-xcrun llvm-cov report ./mem/libmem.so -instr-profile=./mem.test/mem.profdata
-Filename                                                      Regions    Missed Regions     Cover   Functions  Missed Functions  Executed       Lines      Missed Lines     Cover    Branches   Missed Branches     Cover
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-/Users/felixquehl/Documents/c_trace_malloc/mem/code/mem.c          28                 2    92.86%           6                 0   100.00%          87                 4    95.40%          18                 4    77.78%
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-TOTAL                                                              28                 2    92.86%           6                 0   100.00%          87                 4    95.40%          18                 4    77.78%
+xcrun llvm-cov export ./mem/libmem.so -instr-profile=./mem.test/mem.profdata | python3 ./util/coverage_check.py 80
+**************************************************
+
+Coverage:
+
+        branches        :       94.44%
+        functions       :       100.00%
+        instantiations  :       100.00%
+        lines           :       100.00%
+        regions         :       100.00%
+
+**************************************************
 ```
