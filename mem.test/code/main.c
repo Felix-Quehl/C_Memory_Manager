@@ -5,6 +5,7 @@
 
 int main()
 {
+    printf("**************************************************\n\nTesting:\n\n");
     RUN_TEST(test_with_single_value_with_dedicated_release);
     RUN_TEST(test_with_single_value_with_generic_release);
     RUN_TEST(test_with_two_values_with_dedicated_release);
@@ -12,5 +13,6 @@ int main()
     RUN_TEST(test_with_multiple_values_with_dedicated_release);
     RUN_TEST(test_with_external_allocated_pointer);
     RUN_TEST(test_that_no_leaks_remain);
+    printf("\n**************************************************\n");
     return 0;
 }

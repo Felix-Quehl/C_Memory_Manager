@@ -59,13 +59,19 @@ clang -Weverything -Wall -Wextra -Werror -Wpedantic -Wno-poison-system-directori
 clang -Weverything -Wall -Wextra -Werror -Wpedantic -Wno-poison-system-directories -I./header -I../mem/header -g -fprofile-instr-generate -fcoverage-mapping  -o code/test.o -c code/test.c 
 clang -L../mem -lmem -fprofile-instr-generate -fcoverage-mapping code/main.o code/test.o -o test.out
 ./mem.test/test.out 
-Executing-Test: test_with_single_value_with_dedicated_release
-Executing-Test: test_with_single_value_with_generic_release
-Executing-Test: test_with_two_values_with_dedicated_release
-Executing-Test: test_with_two_values_with_dedicated_release_in_reverse
-Executing-Test: test_with_multiple_values_with_dedicated_release
-Executing-Test: test_with_external_allocated_pointer
-Executing-Test: test_that_no_leaks_remain
+**************************************************
+
+Testing:
+
+               test_with_single_value_with_dedicated_release    :       Pass
+                 test_with_single_value_with_generic_release    :       Pass
+                 test_with_two_values_with_dedicated_release    :       Pass
+      test_with_two_values_with_dedicated_release_in_reverse    :       Pass
+            test_with_multiple_values_with_dedicated_release    :       Pass
+                        test_with_external_allocated_pointer    :       Pass
+                                   test_that_no_leaks_remain    :       Pass
+
+**************************************************
 xcrun llvm-profdata merge -sparse ./mem.test/mem.profraw -o ./mem.test/mem.profdata
 xcrun llvm-cov export ./mem/libmem.so -instr-profile=./mem.test/mem.profdata | python3 ./.util/coverage_check.py 80
 **************************************************
