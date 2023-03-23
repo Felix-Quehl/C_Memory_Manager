@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "mem.h"
-#include "assert.h"
 
 static struct allocation_trace *mem_trace_root;
 
